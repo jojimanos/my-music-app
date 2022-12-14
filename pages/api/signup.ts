@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import cookie from 'cookie'
 import prisma from '../../lib/prisma'
-import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
+import { NextApiRequest, NextApiResponse } from 'next'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     const salt = bcrypt.genSaltSync()
@@ -38,7 +38,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             httpOnly: true,
             maxAge: 8 * 60 * 60,
             path: '/',
-            pathSite: 'lax',
+            sameSite: 'lax',
             secure: process.env.NODE_ENV === 'production',
         })
     )
